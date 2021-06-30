@@ -15,6 +15,10 @@ class MainActivity : AppCompatActivity(), OnAnimalItemClickListner {
     lateinit var binding: ActivityMainBinding
     lateinit var AnimalsList: ArrayList<MyAnimals>
 
+    companion object{
+        val ANIMALS = "USER"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
@@ -43,11 +47,15 @@ class MainActivity : AppCompatActivity(), OnAnimalItemClickListner {
 
     override fun onItemClick(item: MyAnimals, position: Int) {
 
+        val animal = MyAnimals(item.name, item.eat, item.photo)
+
 //        Toast.makeText(this, item.name, Toast.LENGTH_SHORT).show()
         val intent = Intent(this, AnimalDetailsActivity::class.java)
-        intent.putExtra("ANIMALNAME", item.name)
-        intent.putExtra("ANIMALEAT", item.eat)
-        intent.putExtra("ANIMALIMG", item.photo.toString())
+
+        intent.putExtra(ANIMALS, animal)
+//        intent.putExtra("ANIMALNAME", item.name)
+//        intent.putExtra("ANIMALEAT", item.eat)
+//        intent.putExtra("ANIMALIMG", item.photo.toString())
         startActivity(intent)
 
     }
